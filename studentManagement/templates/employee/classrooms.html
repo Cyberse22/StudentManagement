@@ -1,0 +1,61 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <!-- Form tạo danh sách lớp -->
+        <h2>Danh sách các lớp</h2>
+        <form action="employee/classroom_form" method="post">
+            <!-- Dropdown danh sách lớp -->
+            <label for="grade">Grade:</label>
+            <div class="btn-group-vertical" role="group">
+                <input type="radio" id="grade_all" name="grade" value="ALL" onchange="this.form.submit();" class="btn-check" autocomplete="off">
+                <label class="btn btn-secondary" for="grade_all">Tất cả</label>
+
+                <input type="radio" id="grade_ten" name="grade" value="TEN" onchange="this.form.submit();" class="btn-check" autocomplete="off">
+                <label class="btn btn-secondary" for="grade_ten">Lớp 10</label>
+
+                <input type="radio" id="grade_eleven" name="grade" value="ELEVEN" onchange="this.form.submit();" class="btn-check" autocomplete="off">
+                <label class="btn btn-secondary" for="grade_eleven">Lớp 11</label>
+
+                <input type="radio" id="grade_twelve" name="grade" value="TWELVE" onchange="this.form.submit();" class="btn-check" autocomplete="off">
+                <label class="btn btn-secondary" for="grade_twelve">Lớp 12</label>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <!-- Hiển thị thông tin danh sách lớp -->
+        <h2>Danh Sách Lớp</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Tên Lớp</th>
+                    <th scope="col">Năm Học</th>
+                    <th scope="col">Sĩ Số</th>
+                    <th scope="col">Giáo Viên Chủ Nhiệm</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for classroom in classrooms %}
+                <tr>
+                    <td>{{ classroom.name }}</td>
+                    <td>{{ classroom.period }}</td>
+                    <td>{{ classroom.student_count }}</td>
+                    <td>{{ classroom.form_teacher }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Phân trang -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+            </ul>
+        </nav>
+        <!-- Nút tạo danh sách lớp -->
+        <a href="employee/classroom_form" class="btn btn-primary">Tạo Danh Sách Lớp</a>
+    </div>
+</div>
+{% endblock %}
